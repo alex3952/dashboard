@@ -8,6 +8,7 @@ import './App.css'
 
 function App() {
   //const [count, setCount] = useState(0)
+  
 
   return (
     <Grid container spacing={5}>
@@ -18,7 +19,7 @@ function App() {
 	      <Grid xs={6} sm={4} md={6} lg={2}>5</Grid>
 	      <Grid xs={6} sm={4} md={6} lg={2}>6</Grid>
 		  <Indicator title='Precipitación' subtitle='Probabilidad' value={0.13} />
-	    </Grid>
+	</Grid>
   )
 }
 
