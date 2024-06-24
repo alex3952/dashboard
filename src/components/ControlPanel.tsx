@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -13,6 +13,10 @@ export default function ControlPanel() {
     {/* Variable de estado y función de actualización */}
 
     let [selected, setSelected] = useState(-1)
+
+    {/* Variable de referencia a un elemento */ }
+
+    const descriptionRef = useRef<HTMLDivElement>(null);
 
     {/* Datos de los elementos del Select */}
 
@@ -30,6 +34,11 @@ export default function ControlPanel() {
 			
         let idx = parseInt(event.target.value)
         setSelected( idx );
+        {/* Modificación de la referencia */}
+
+        if (descriptionRef.current !== null) {
+            descriptionRef.current.innerHTML = (idx >= 0) ? items[idx]["description"] : ""
+        }
 
     };
 
@@ -67,13 +76,9 @@ export default function ControlPanel() {
                 </FormControl>
 
             </Box>
-            
+
             {/* Muestra la descripción de la variable seleccionada */}
-            <Typography mt={2} component="p" color="text.secondary">
-            {
-                (selected >= 0)?items[selected]["description"]:""
-            }
-            </Typography>
+            <Typography ref={descriptionRef} mt={2} component="p" color="text.secondary" />
 
         </Paper>
 
