@@ -11,7 +11,7 @@ function App() {
 	{/* Variable de estado y función de actualización */}
 
 	let [indicators, setIndicators] = useState([])
-	let [rowsTable, setRowsTable] = useState([])
+	const [Variable, setVariable] = useState(-1);
 
     {/* Hook: useEffect */}
 		
@@ -64,18 +64,18 @@ function App() {
 		*/}
 
 		let location = xml.getElementsByTagName("location")[1]
-		let name = xml.getElementsByTagName("name")[0].innerHTML
+		//let name = xml.getElementsByTagName("name")[0].innerHTML
 		//let namei = name.getAttribute("name")
-		dataToIndicators.push(["Ciudad","name", name])
+		//dataToIndicators.push(["Ciudad","name", name])
 
 		let geobaseid = location.getAttribute("geobaseid")
-		dataToIndicators.push(["Location","geobaseid", geobaseid])
+		dataToIndicators.push(["Geobaseid","Guayaquil", geobaseid])
 
 		let latitude = location.getAttribute("latitude")
-		dataToIndicators.push(["Location","Latitude", latitude])
+		dataToIndicators.push(["Latitud","Guayaquil", latitude])
 
 		let longitude = location.getAttribute("longitude")
-		dataToIndicators.push(["Location","Longitude", longitude])
+		dataToIndicators.push(["Lonfitud","Guayaquil", longitude])
 
 		//console.log( dataToIndicators )
 		
@@ -88,26 +88,6 @@ function App() {
 		{/* Modificación de la variable de estado mediante la función de actualización */}
 
 		setIndicators(indicatorsElements)
-		 {/* 
-             2. Procese los resultados de acuerdo con el diseño anterior.
-             Revise la estructura del documento XML para extraer los datos necesarios. 
-         */}
-
-         let arrayObjects = Array.from( xml.getElementsByTagName("time") ).map( (timeElement) =>  {
-				
-			let rangeHours = timeElement.getAttribute("from").split("T")[1] + " - " + timeElement.getAttribute("to").split("T")[1]
-
-			let windDirection = timeElement.getElementsByTagName("windDirection")[0].getAttribute("deg") + " "+  timeElement.getElementsByTagName("windDirection")[0].getAttribute("code") 
-			   
-			return { "rangeHours": rangeHours,"windDirection": windDirection }
-		   
-		})
-
-		arrayObjects = arrayObjects.slice(0,8)
-	   
-		{/* 3. Actualice de la variable de estado mediante la función de actualización */}
-
-		setRowsTable(arrayObjects)
 
 		})()
 	},[])
@@ -115,6 +95,24 @@ function App() {
 	{/* JSX */}
 	return (
     <Grid container spacing={5}>
+		  <Grid xs={12} sm={12} md={12} lg={12}>
+		  	<h1 className="h1" id="titulo">
+			    Tiempo y clima en Guayaquil
+			</h1>
+		  </Grid>
+		  <Grid xs={12} sm={12} md={12} lg={12}>
+			<h2 className="h2" id="Hoy">
+				Fecha y hora
+			</h2>
+		  </Grid>
+	      <Grid xs={12} sm={12} md={12} lg={12}>
+		  	<Summary></Summary>
+		  </Grid>
+		  <Grid xs={12} sm={12} md={12} lg={12}>
+			<h2 className="h2" id="Hoy">
+				Indicadores del día de hoy
+			</h2>
+		  </Grid>
 	      <Grid xs={6} sm={4} md={3} lg={4}>
 		  	{indicators[0]}
 		  </Grid>
@@ -124,23 +122,24 @@ function App() {
 	      <Grid xs={6} sm={4} md={3} lg={4}>
 		  	{indicators[2]}
 		  </Grid>
-	      <Grid xs={6} sm={4} md={3} lg={6}>
-		  	{indicators[3]}
+		  <Grid xs={12} sm={12} md={12} lg={12}>
+			<h2 className="h2" id="pronostico">
+				Tabla de pronosticos
+			</h2>
 		  </Grid>
-	      <Grid xs={6} sm={4} md={3} lg={6}>
-		  	<BasicTable rows={rowsTable}></BasicTable>
+	      <Grid xs={12} sm={12} md={12} lg={12}>
+		  	<BasicTable></BasicTable>
 		  </Grid>
-		  <Grid xs={12} sm={4} md={3} lg={4}>
-			<Summary></Summary>
-		  </Grid>
-		  <Grid xs={6} sm={4} md={3} lg={8}>
-			
+		  <Grid xs={12} sm={12} md={12} lg={12}>
+			<h2 className="h2" id="pronostico">
+				Grafico
+			</h2>
 		  </Grid>
 		  <Grid xs={12} lg={2}>
-             <ControlPanel />
+		  	<ControlPanel setVariable={setVariable} />
          </Grid>
 		  <Grid xs={12} lg={10}>
-             <WeatherChart></WeatherChart>
+		  	<WeatherChart Valor_seleccionado={Variable} />
          </Grid>
 	</Grid>
 	
