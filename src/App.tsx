@@ -64,9 +64,6 @@ function App() {
 		*/}
 
 		let location = xml.getElementsByTagName("location")[1]
-		//let name = xml.getElementsByTagName("name")[0].innerHTML
-		//let namei = name.getAttribute("name")
-		//dataToIndicators.push(["Ciudad","name", name])
 
 		let geobaseid = location.getAttribute("geobaseid")
 		dataToIndicators.push(["Geobaseid","Guayaquil", geobaseid])
