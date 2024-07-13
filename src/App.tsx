@@ -72,7 +72,7 @@ function App() {
 		dataToIndicators.push(["Latitud","Guayaquil", latitude])
 
 		let longitude = location.getAttribute("longitude")
-		dataToIndicators.push(["Lonfitud","Guayaquil", longitude])
+		dataToIndicators.push(["Longitud","Guayaquil", longitude])
 
 		//console.log( dataToIndicators )
 		
