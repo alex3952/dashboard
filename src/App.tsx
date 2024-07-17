@@ -6,6 +6,7 @@ import BasicTable from './components/BasicTable';
 import WeatherChart from './components/WeatherChart';
 import ControlPanel from './components/ControlPanel';
 import './App.css'
+import Box from '@mui/material/Box';
 
 function App() {
 	{/* Variable de estado y función de actualización */}
@@ -110,9 +111,11 @@ function App() {
 				Indicadores del día de hoy
 			</h2>
 		  </Grid>
-	      <Grid xs={6} sm={4} md={3} lg={4}>
-		  	{indicators[0]}
-		  </Grid>
+	      <Box bgcolor= "lightgray" p={2} borderRadius={2}>
+		  	<Grid xs={6} sm={4} md={3} lg={12}>
+		  		{indicators[0]}
+		  	</Grid>
+		  </Box>
 	      <Grid xs={6} sm={4} md={3} lg={4}>
 		  	{indicators[1]}
 		  </Grid>
